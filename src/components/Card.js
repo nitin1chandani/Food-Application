@@ -1,15 +1,10 @@
 import React from "react";
 import "./Card.css";
-
+import { IMG_CDN_URL } from "../constants.js";
 const Card = ({ name, cuisines, cloudinaryImageId, lastMileTravelString }) => {
   return (
     <div className="card">
-      <img
-        src={
-          "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
-          cloudinaryImageId
-        }
-      />
+      <img src={IMG_CDN_URL + cloudinaryImageId} />
       <h2>{name}</h2>
       <h3>{cuisines.join(", ")}</h3>
       <h4>{lastMileTravelString} minutes</h4>
