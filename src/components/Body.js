@@ -1,20 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import "./Body.css";
 import { resList } from "../constants";
+import Shimmer from "./Shimmer";
 
-const filterData = (text, restaurants) => {
-  const filteredData = resList.filter((restro) => {
-    return restro.data.name.toLowerCase().includes(text.toLowerCase());
+const filterData = (searchText, restaurants) => {
+  const filteredData = restaurants.filter((restro) => {
+    return restro.data.name.toLowerCase().includes(searchText.toLowerCase());
   });
   return filteredData;
 };
 
 const Body = () => {
+  const [allRests, setAllRests] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [searchClicked, setSearchClicked] = useState(false);
-  const [rests, setRest] = useState(resList);
-  return (
+  const [fileterdRests, setFilteredRests] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  async function fetchData() {
+    try {
+      const data = await fetch(
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
+      );
+
+      const json = await data.json();
+
+      // Optional Chaining
+      setAllRests(json?.data?.cards[2]?.data?.data?.cards);
+      setFilteredRests(json?.data?.cards[2]?.data?.data?.cards);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  if (fileterdRests?.length === 0) {
+    return <h1>No restraunts found !!</h1>;
+  }
+  return allRests?.length === 0 ? (
+    <Shimmer />
+  ) : (
     <>
       <div className="search-container">
         <input
@@ -28,18 +54,18 @@ const Body = () => {
           className="search-btn"
           onClick={() => {
             // filtering the data
-            const data = filterData(searchText, rests);
+            const data = filterData(searchText, allRests);
             // and update the state - rest
-            setRest(data);
+            setFilteredRests(data);
           }}
         >
           Search
         </button>
       </div>
       <div className="list">
-        {rests.map((restraunt) => {
-          return <Card {...restraunt.data} key={restraunt.data.id} />;
-        })}
+        {fileterdRests.map((restraunt) => (
+          <Card {...restraunt.data} key={restraunt.data.id} />
+        ))}
       </div>
     </>
   );
