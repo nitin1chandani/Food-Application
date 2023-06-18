@@ -36,7 +36,7 @@ const Body = () => {
     }
   }
   if (fileterdRests?.length === 0) {
-    return <h1>No restraunts found !!</h1>;
+    // return <h1>No restraunts found !!</h1>;
   }
   return allRests?.length === 0 ? (
     <Shimmer />
