@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import "./Header.css";
+import { Link } from "react-router-dom";
 const Title = () => {
   return (
-    <a href="/">
+    <Link to="/">
       <img
         src="https://i.pinimg.com/originals/b1/fc/bb/b1fcbbfd4fb8116c714ef352bb39bbaf.jpg"
         className="logo"
         alt=""
       />
-    </a>
+    </Link>
   );
 };
 
@@ -21,10 +22,18 @@ const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
-          <li>Cart</li>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <li>Home</li>
+          </Link>
+          <Link to="/about" style={{ textDecoration: "none" }}>
+            <li>About</li>
+          </Link>
+          <Link to="/contact" style={{ textDecoration: "none" }}>
+            <li>Contact</li>
+          </Link>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <li>Cart</li>
+          </Link>
         </ul>
       </div>
       {isLoggedIn ? (
