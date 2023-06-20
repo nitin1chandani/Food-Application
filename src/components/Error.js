@@ -1,8 +1,8 @@
 import React from "react";
 import { useRouteError } from "react-router-dom";
 import "./Error.css"; // Import the CSS file
-import Header from "./Header";
-import Footer from "./Footer";
+// import Header from "./Header";
+// import Footer from "./Footer";
 
 const Error = () => {
   const errorResponse = useRouteError();

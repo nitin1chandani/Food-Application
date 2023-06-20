@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import "./Body.css";
-import { resList } from "../constants";
+// import { resList } from "../constants";
 import Shimmer from "./Shimmer";
 
 const filterData = (searchText, restaurants) => {

@@ -9,7 +9,7 @@ async function getRestrauntMenu() {
   console.log(json.data);
 }
 const RestrauntMenu = () => {
-  const [menu, setMenu] = useState({});
+  // const [menu, setMenu] = useState({});
 
   useEffect(() => {
     getRestrauntMenu();
